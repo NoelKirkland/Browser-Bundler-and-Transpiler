@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
-import CodeEditor from "./components/code-editor";
+import CodeEditor from './components/code-editor';
 
 const App = () => {
   const ref = useRef<any>();
@@ -59,11 +59,25 @@ const App = () => {
         </script>
       </body>
     </html>
-  `
+  `;
 
   return (
     <div>
-      <CodeEditor />
+      <CodeEditor
+        initialValue={`
+            const me = {
+              first: 'Noel',
+              last: 'Kirkland',
+              straight: true,
+              pronouns: ['he', 'him', 'his'],
+              scale: 10,
+              adjectives: ['sexy', 'bomb', 'a 10 for sure'],
+              dong: 7.6,
+              charisma: Infinity,
+            }
+          `}
+        onChange={(value) => setInput(value)}
+      />
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -71,7 +85,12 @@ const App = () => {
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <iframe ref={iframe} title="preview" sandbox="allow-scripts" srcDoc={html}></iframe>
+      <iframe
+        ref={iframe}
+        title="preview"
+        sandbox="allow-scripts"
+        srcDoc={html}
+      ></iframe>
     </div>
   );
 };
